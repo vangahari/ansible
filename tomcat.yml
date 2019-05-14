@@ -1,0 +1,7 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+   - name: copy the content
+     command:  echo '<role rolename="manager-gui,manager-scrip"/> \n<user username="tomcat" password="tomcat" roles="manager-gui,manager-scrip"/>'>>"/opt/tomcat7/conf/tomcat-users.xml"
+

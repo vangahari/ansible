@@ -1,0 +1,31 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: print the date and time
+      debug: 
+        var: ansible_date_time.time
+
+# create a file based on the time stamp
+    - name: create a file based on time stamp
+      command: touch harinadh{{ansible_date_time.date}}.log
+
+
+# display the date
+    
+    - name: display the date
+      debug: 
+        var: ansible_date_time.date
+
+# call the variables
+    
+- hosts: all
+  become: true
+  vars:
+   name:
+   - hari
+   - sambasiva
+  tasks:
+    - name: print the name
+      debug: 
+        msg: "{{name[1]}}"

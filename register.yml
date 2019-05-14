@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: ansible reg variable example
+      shell: "find *.txt"
+      args:
+        chdir: "/home/ansible"
+      register: reg_output
+    - debug: 
+        var: reg_output
+     
+
+# print the sec.txt file content
+    - name: print the date and time
+      command: cat /opt/sec.txt 
+      register: date_output
+    - debug:
+        var: date_output

@@ -1,0 +1,65 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: create a user with password
+      user: 
+        name: user1
+        password: password
+  
+# create a directory
+    - name: create a directory
+      file:
+        path: /home/ansible/testdir
+        state: directory
+        mode: 755
+        owner: ansible
+        group: ansible
+      
+
+    - name: create a multiple dir's
+      file:
+        path: "{{item}}"
+        state: directory
+      with_items:
+         - "/home/ansible/testdir1"
+         - "/home/ansible/testdir2"
+         - "/home/ansible/testdir3"
+   
+
+    - name: create a file 
+      file:
+        path: /home/ansible/secret.txt
+        state: touch
+        mode: 755
+        owner: ansible
+        group: ansible
+
+
+    - name: copy the file to another location
+      copy:
+        src: /home/ansible/sec.txt
+        dest: /opt/
+
+# copy the content to the file
+   
+    - name: copy the content tp the file
+      copy: 
+       content: "hello this is hari"
+       dest: /opt/sec.txt
+
+
+# Replace the string using replace module
+    
+    - name: Replace the string
+      replace:
+       path: /opt/sec.txt
+       regexp: "hari"
+       replace: "helloworld"
+
+# Archive the file or dir's using archive module
+    - name: archie the file
+      archive: 
+        path: /home/ansible/secret.txt
+        dest: /home/ansible/secret.zip
+        format: zip

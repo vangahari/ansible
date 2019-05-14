@@ -1,0 +1,33 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: install apache server
+      package:
+        name: httpd
+        state: installed
+
+    - name: copy the file src to dest
+      copy:
+        src: /home/ansible/index.html
+        dest: /var/www/html/
+    - name: replace the content
+      replace:
+        path: /var/www/html/index.html
+        regexp: "hii"
+        replace: "hello this is hari"
+      notify:
+        - restart httpd
+    - name: start the service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+   
+  handlers:
+    - name: restart httpd
+      service: name=httpd state=restarted
+
+    - name: status of the service
+      command: 'service httpd status'
+
