@@ -1,0 +1,36 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: create a file
+      file: path=/home/ec2-user/siva.txt state=touch mode=700 owner=ec2-user group=ec2-user
+
+    - name: create a directory
+      file: path=/home/ec2-user/dir1 state=directory mode=700
+
+    - name: copy content to the file
+      copy: content="hello" dest=/home/ec2-user/siva.txt
+
+- hosts: web
+  become: yes
+  tasks:
+   - name: create a file
+     file: path=/home/ec2-user/sivudu.txt state=touch
+
+   - name: copy content into file
+     copy: content="hello world \n" dest=/home/ec2-user/sivudu.txt
+
+
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: copy file
+      copy: src=/etc/ansible/playbooks dest=/home/ec2-user
+
+    - name: zip file
+      archive:
+      path: /home/ec2-user/sivudu.txt
+      dest: /home/ec2-user/sivudu.zip
+      format: zip
+
