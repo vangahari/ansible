@@ -1,8 +1,74 @@
+# https://docs.ansible.com/ansible/2.9/modules/file_module.html#file-module
 ---
 - hosts: web 
   become: true
   tasks:
+
+    - name: Create the directory
+      file: 
+        path: /home/ubuntu/hari
+        state: directory
+        
+    - name: Create a directory if it does not exist with the default permissons
+      file:
+        path: /home/ubuntu/hari
+        mode: u+rwx,g+rx,o+rx
+
+    - name: Change the ownership of the directory recursively
+      file: 
+        path: /home/ubuntu/hari
+        state: directory
+        recurse: yes
+        owner: root
+        group: root
+        
     - name: Create the file
       file:
-        path: $HOME/hari.txt
-        state: touch 
+        path: /home/ubuntu/hari/example.txt
+        state: touch
+
+    - name: Create a file and add the permissions 
+      file:
+        path: /home/ubuntu/hari/example.txt
+        state: touch
+        mode: u=rw,g=r,o=r
+
+    - name: Touch the same file, but add/remove some permissions
+      file:
+        path: /home/ubuntu/hari/example.txt
+        state: touch
+        mode: u+rw,g+wx,o+rwx
+
+    - name: Touch again the same file, but dont change times this makes the task idempotent
+      file:
+        path: /home/ubuntu/hari/example.txt
+        state: touch
+        mode: u+rw,g-wx,o-rwx
+        modification_time: preserve
+        access_time: preserve
+    
+    - name: Create the symbolik link (softlink)
+      file: 
+        src: /home/ubuntu/hari/example.txt
+        dest: /home/ubuntu/example.txt
+        state: link
+        owner: root 
+        group: root 
+    
+    - name: Create the hard link 
+      file: 
+        src: /home/ubuntu/hari/example.txt
+        dest: /home/ubuntu/example.txt
+        owner: root
+        group: root
+        state: hard
+    
+    - name: Delete the file 
+      file:
+        path: /home/ubuntu/example.txt
+        state: absent
+
+    - name: recursively remove directory
+      file:
+        path: /home/ubuntu/hari
+        state: absent
