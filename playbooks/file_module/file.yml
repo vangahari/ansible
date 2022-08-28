@@ -1,0 +1,8 @@
+---
+- hosts: web 
+  become: true
+  tasks:
+    - name: Create the file
+      file:
+        path: $HOME/hari.txt
+        state: touch 
