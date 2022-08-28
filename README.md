@@ -15,9 +15,11 @@ Master, slave configuration using ssh keys
 Add entry in ansbile host to call ansible
 1. Go to path where hosts file keeps - ex /etc/ansible/hosts
 2. Add entry in host file for slave
+
     [web]
     slave1 ansible_ssh_host=1.2.3.4
 3. Test the connection using the ansible ping module
+
     ansible -m ping all/web/slave1
 
     a. all - it will call all the hosts that has entry in hosts file
