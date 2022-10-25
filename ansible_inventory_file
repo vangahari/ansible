@@ -9,7 +9,7 @@
 server1.company.com
 server2.company.com
 
-## You can also different servers to geather like below 
+## You can also group different servers togeather like below 
 [web]
 server3.company.com
 server4.company.com
@@ -18,7 +18,7 @@ server4.company.com
 server5.company.com
 server6.company.com
 
-## You can also togeather the groups of groups like below
+## You can also group togeather the groups of groups like below
 [all_servers:children]
 web
 db 
@@ -44,3 +44,9 @@ Other Inventoy parameters are:
     - ansible_port - 22/5986 - Which port ansible is going to use to connect to target server
     - ansible_user - root/admin/centos/ubuntu - what user ansible is going to use to connect to target server
     - ansible_ssh_pass Password - What Password ansible is going to use to connect to target server
+
+Ex:
+web1 ansible_host=server1.company.com ansible_connection=ssh ansible_port=22 ansible_user=centos ansible_ssh_pass=password#121
+
+localhost:
+localhost  ansible_connection=localhost
