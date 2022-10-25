@@ -1,0 +1,46 @@
+## Ansible work with multiple servers in your infrastructure at the same time. In order to work with multiple machines ansbile needs to establish the connectivity to those servers. This is done with SSH for linux, powershell remoting for Windows. Thats what ansible makes agentless 
+
+## Now the information about the target systems will be stored in a file called inventory file which will be available in the path "/etc/ansible/hosts"
+
+## If you dont create any ansible inventory file, ansible by default uses this file which is located in "/etc/ansible/hosts"
+
+## Sample inventory file 
+
+server1.company.com
+server2.company.com
+
+## You can also different servers to geather like below 
+[web]
+server3.company.com
+server4.company.com
+
+[db]
+server5.company.com
+server6.company.com
+
+## You can also togeather the groups of groups like below
+[all_servers:children]
+web
+db 
+
+## More examples.
+# I have list of servers named 1,2...4
+server1.company.com
+server2.company.com
+server3.company.com
+server4.company.com
+
+## However I would like to call using alias in ansible. I could add host parameter and alias in the beginning of the line like below
+
+web1 ansible_host=server1.company.com
+web2 ansible_host=server2.company.com
+db1 ansible_host=server3.company.com
+db2 ansible_host=server4.company.com
+
+## Note: ansible_host is the inventory parameter, that you can specify the FQDN or IP address for the target 
+
+Other Inventoy parameters are:
+    - ansible_connection - ssh/winrm/localhost - Which type of connection ansible is going to use to connect to target server
+    - ansible_port - 22/5986 - Which port ansible is going to use to connect to target server
+    - ansible_user - root/admin/centos/ubuntu - what user ansible is going to use to connect to target server
+    - ansible_ssh_pass Password - What Password ansible is going to use to connect to target server

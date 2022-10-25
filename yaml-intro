@@ -1,0 +1,55 @@
+** Ansible playbooks are text files or configuration files that are written in a format called YAML 
+
+YAML mainly written in key value pair separated by a colon
+
+Example:
+Fruit: apple 
+Vegetable: Carrot
+Animal: Lion
+Meat: Mutton
+
+
+Array/Lists
+Fruits:
+    - Apple
+    - Banana
+    - Orange
+    - Mango
+Animals:
+    - Lion
+    - Tiger
+    - Elephant 
+    - Zebra
+
+Dictionary/map
+    Banana: 
+        Calaries: 105
+        Fat: 0.4g
+        Carbs: 27g
+
+Key value / Dictionary/ Lists 
+
+Fruits:
+    - Banana: 
+        Calaries: 105
+        Fat: 0.4g
+        Carbs: 27g
+    - Grape: 
+        Calaries: 62
+        Fat: 0.3g
+        Carbs: 26g
+
+
+Key notes to keep in mind:
+1) Dictionaries are not ordered 
+    eg: - Banana: 
+            Calaries: 105
+            Fat: 0.4g
+            Carbs: 27g
+        - Grape: 
+            Calaries: 62
+            Carbs: 26g
+            Fat: 0.3g
+Like if you see above the the order is not required, even if you change the properties in terms of order it doesnt matter but it still the same
+
+2) Lists / Array are order. 
